@@ -9,7 +9,6 @@ class SlacksController < ApplicationController
       if thread_params
         # thread_paramsで指定されたスレッドを取得
         response = get_response_from_slack_api(thread_params[:channel_id], thread_params[:thread_ts])
-        thread_params[:messages] = response.messages
 
         if response.ok
           # responseが取得できた場合、SlackThreadを保存
@@ -55,7 +54,7 @@ class SlacksController < ApplicationController
   private
 
   def slack_thread_params
-    params.require(:slack_thread).permit(:channel_id, :thread_ts, :messages)
+    params.require(:slack_thread).permit(:channel_id, :thread_ts)
   end
 
   def get_response_from_slack_api(channel, ts)

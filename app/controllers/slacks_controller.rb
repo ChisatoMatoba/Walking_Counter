@@ -50,6 +50,11 @@ class SlacksController < ApplicationController
     end
   end
 
+  def destroy
+    @slack_thread = SlackThread.find(params[:id])
+    @slack_thread.destroy
+    redirect_to slacks_path, notice: 'スレッドを削除しました'
+  end
 
 
   private

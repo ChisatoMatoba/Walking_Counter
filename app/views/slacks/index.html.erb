@@ -17,6 +17,7 @@
         <li class="list-group-item">
           <% first_post = slack_thread.slack_posts.first %>
           <%= link_to first_post.content, slack_path(slack_thread), class: 'link-dark' if first_post %>
+          <%= button_to '削除', slack_path(slack_thread), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
         </li>
       <% end %>
     </ul>

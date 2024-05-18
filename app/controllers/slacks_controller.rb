@@ -28,7 +28,7 @@ class SlacksController < ApplicationController
         end
       end
     else
-      flash[:alert] = "URLの形式が正しくありません。正しい形式：https://xxxxx.slack.com/archives/CCCCCCCCCCC/p1111111111"
+      flash[:alert] = 'URLの形式が正しくありません。正しい形式：https://xxxxx.slack.com/archives/CCCCCCCCCCC/p1111111111'
       redirect_to slacks_path
     end
   end
@@ -56,7 +56,6 @@ class SlacksController < ApplicationController
     redirect_to slacks_path, notice: 'スレッドを削除しました'
   end
 
-
   private
 
   def slack_thread_params
@@ -65,7 +64,7 @@ class SlacksController < ApplicationController
 
   def get_response_from_slack_api(channel, ts)
     client = Slack::Web::Client.new
-    response = client.conversations_replies(
+    client.conversations_replies(
       token: ENV['SLACK_SCOPE_TOKEN'],
       channel: channel,
       ts: ts

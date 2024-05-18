@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :slacks do
-    resources :slack_posts do
+
+    member do
+      post :reload_thread
     end
   end
 end

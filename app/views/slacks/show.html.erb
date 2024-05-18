@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="content">
+    <%= button_to 'スレッド再読み込み', reload_thread_slack_path(@slack_thread), method: :post, class: "btn btn-success" %>
+  </div>
+
+  <div class="content">
+    <h1>メッセージ一覧</h1>
+    <ul class="list-group list-group-flush">
+      <% @slack_posts.each do |slack_post| %>
+        <li class="list-group-item">
+          <%= slack_post.author_name %>
+          <%= slack_post.posted_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          <%= slack_post.content %>
+          <%= slack_post.image_urls %>
+        </li>
+      <% end %>
+    </ul>
+</div>

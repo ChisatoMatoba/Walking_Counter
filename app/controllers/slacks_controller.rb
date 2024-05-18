@@ -17,6 +17,7 @@ class SlacksController < ApplicationController
           if @slack_thread.save
             # 各メッセージを、SlackPostに保存
             @slack_thread.save_posts(response.messages)
+            @slack_thread.save_images
             # 保存が成功したら、showページにリダイレクト
             redirect_to slack_path(@slack_thread), notice: 'スレッドが正常に取得できました！'
           else

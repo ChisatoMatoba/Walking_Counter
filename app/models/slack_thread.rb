@@ -5,7 +5,7 @@ class SlackThread < ApplicationRecord
     messages.each do |message|
       unless self.slack_posts.exists?(post_id: message.ts)
         user_info = get_user_info(message.user)
-        image_urls = message.files&.map { |file| file.url_private } if message.files&.any?
+        image_urls = message.files&.map { |file| file.url_private_download } if message.files&.any?
 
         slack_post_params = {
           post_id: message.ts,
@@ -36,5 +36,14 @@ class SlackThread < ApplicationRecord
       token: ENV['SLACK_SCOPE_TOKEN'],
       user: user_id
     )
+  end
+
+  def save_images
+    self.slack_posts.each do |post|
+      post.image_urls&.each do |image_url|
+        image = Image.new
+        image.download_and_store_image(post, image_url)
+      end
+    end
   end
 end

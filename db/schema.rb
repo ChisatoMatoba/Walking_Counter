@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_073840) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_075323) do
   create_table "slack_posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "post_id"
     t.string "author_name"
     t.text "content"
     t.datetime "posted_at"
+    t.text "image_urls"
     t.bigint "slack_thread_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_073840) do
     t.string "thread_ts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "messages"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

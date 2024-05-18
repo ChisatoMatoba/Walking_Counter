@@ -5,6 +5,7 @@ class SlackPosts < ActiveRecord::Migration[7.1]
       t.string :author_name
       t.text :content
       t.datetime :posted_at
+      t.text :image_urls
       t.references :slack_thread, foreign_key: true
 
       t.timestamps

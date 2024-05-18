@@ -1,9 +1,8 @@
 class SlackThreads < ActiveRecord::Migration[7.1]
   def change
     create_table :slack_threads do |t|
-      t.string :thread_id
-      t.string :title
-      t.datetime :started_at
+      t.string :channel_id
+      t.string :thread_ts
 
       t.timestamps
     end

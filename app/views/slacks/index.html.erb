@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="content">
+    <h1>Slackスレッドの登録</h1>
+    <%= form_with model: @slack_thread, url: slacks_path, local: true do |form| %>
+      <%= render "/shared/errors", object: @slack_thread %>
+
+      <%= form.label :slack_thread_url, "スレッドURL:" %>
+      <%= form.text_field :slack_thread_url %>
+      <%= form.submit "スレッド読み込み" %>
+    <% end %>
+  </div>
+
+  <div class="content">
+    <h1>スレッド一覧</h1>
+    <ul class="list-group list-group-flush">
+      <% @slack_threads.each do |slack_thread| %>
+        <li class="list-group-item">
+          <% first_post = slack_thread.slack_posts.first %>
+          <%= link_to first_post.content, slack_path(slack_thread), class: 'link-dark' if first_post %>
+        </li>
+      <% end %>
+    </ul>
+</div>

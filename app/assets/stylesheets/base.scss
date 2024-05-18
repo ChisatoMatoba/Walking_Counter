@@ -11,6 +11,19 @@
   max-width: 800px;
   width: 100%;
 }
+.content pre {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.content code {
+  background-color: #f8f8f8;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
 .post-image {
   margin: 0 auto;
   max-width: 100%;

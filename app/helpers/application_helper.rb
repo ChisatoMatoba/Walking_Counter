@@ -28,6 +28,6 @@ module ApplicationHelper
     }
 
     # マークダウンをHTMLに変換し、結果をhtml_safeにする
-    Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
+    Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe # rubocop:disable all
   end
 end

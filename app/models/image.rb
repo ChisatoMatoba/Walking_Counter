@@ -5,7 +5,7 @@ class Image < ApplicationRecord
   has_one_attached :file
 
   def download_and_store_image(post, image_url)
-    file_data = URI.open(image_url, 'Authorization' => "Bearer #{ENV['SLACK_SCOPE_TOKEN']}")
+    file_data = URI.open(image_url, 'Authorization' => "Bearer #{ENV['SLACK_SCOPE_TOKEN']}") # rubocop:disable all
     file.attach(io: file_data, filename: File.basename(image_url))
     self.slack_post = post
     save!

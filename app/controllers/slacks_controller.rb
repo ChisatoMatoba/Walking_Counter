@@ -11,18 +11,8 @@ class SlacksController < ApplicationController
         response = get_response_from_slack_api(thread_params[:channel_id], thread_params[:thread_ts])
 
         if response.ok
-          # responseが取得できた場合、SlackThreadを保存
-          @slack_thread = SlackThread.new(thread_params)
-
-          if @slack_thread.save
-            # 各メッセージを、SlackPostに保存
-            @slack_thread.save_posts(response.messages)
-            @slack_thread.save_images
-            # 保存が成功したら、showページにリダイレクト
-            redirect_to slack_path(@slack_thread), notice: 'スレッドが正常に取得できました！'
-          else
-            redirect_to slacks_path, alert: 'スレッドの取得に失敗しました'
-          end
+          # responseが取得できた場合、SlackThread及びposts, imagesを保存
+          slack_thread_save(@slack_thread, response)
         else
           redirect_to slacks_path, alert: 'スレッドの取得に失敗しました'
         end
@@ -62,12 +52,26 @@ class SlacksController < ApplicationController
     params.require(:slack_thread).permit(:channel_id, :thread_ts)
   end
 
-  def get_response_from_slack_api(channel, ts)
+  def get_response_from_slack_api(channel, thread_ts)
     client = Slack::Web::Client.new
     client.conversations_replies(
       token: ENV['SLACK_SCOPE_TOKEN'],
       channel: channel,
-      ts: ts
+      ts: thread_ts
     )
+  end
+
+  def slack_thread_save(new_slack_thread, response)
+    new_slack_thread = SlackThread.new(new_slack_thread)
+
+    if new_slack_thread.save
+      # 各メッセージを、SlackPostに保存
+      new_slack_thread.save_posts(response.messages)
+      new_slack_thread.save_images
+      # 保存が成功したら、showページにリダイレクト
+      redirect_to slack_path(new_slack_thread), notice: 'スレッドが正常に取得できました！'
+    else
+      new_slack_thread slacks_path, alert: 'スレッドの取得に失敗しました'
+    end
   end
 end

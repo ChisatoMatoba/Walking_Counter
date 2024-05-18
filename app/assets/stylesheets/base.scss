@@ -3,13 +3,29 @@
   position: relative;
   top: 0px;
   margin-top: 0;
-  padding: 35px auto;
   -webkit-transition: transform .3s ease-in;
           transition: transform .3s ease-in;
 }
 .content {
-  margin: 0 auto;
-  padding: 0 100px;
+  margin: 0 auto 100px auto;
   max-width: 800px;
   width: 100%;
+}
+.content pre {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.content code {
+  background-color: #f8f8f8;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.post-image {
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }

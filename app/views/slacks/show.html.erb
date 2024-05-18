@@ -8,9 +8,9 @@
     <ul class="list-group list-group-flush">
       <% @slack_posts.each do |slack_post| %>
         <li class="list-group-item">
-          <%= slack_post.author_name %>
-          <%= slack_post.posted_at.strftime("%Y-%m-%d %H:%M:%S") %>
-          <%= slack_post.content %>
+          <%= slack_post.author_name %><br>
+          <%= slack_post.posted_at.strftime("%Y-%m-%d %H:%M:%S") %><br>
+          <%= slack_post.content %><br>
           <% slack_post.images&.each do |image| %>
             <% if image.file.attached? %>
               <%= image_tag(url_for(image.file), class: "post-image") %>

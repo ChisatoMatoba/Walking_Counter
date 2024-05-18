@@ -11,7 +11,11 @@
           <%= slack_post.author_name %>
           <%= slack_post.posted_at.strftime("%Y-%m-%d %H:%M:%S") %>
           <%= slack_post.content %>
-          <%= slack_post.image_urls %>
+          <% slack_post.images&.each do |image| %>
+            <% if image.file.attached? %>
+              <%= image_tag(url_for(image.file), class: "post-image") %>
+            <% end %>
+          <% end %>
         </li>
       <% end %>
     </ul>
